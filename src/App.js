@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Container, Box, Typography } from '@mui/material';
+import ProductList from './components/ProductList';
+import Filters from './components/Filter';
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const products = [
+      { id: 1, name: 'Laptop', price: 800, category: 'Electronics' },
+      { id: 2, name: 'T-Shirt', price: 20, category: 'Clothing' },
+    ];
+    dispatch({ type: 'SET_PRODUCTS', payload: products });
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Box my={4}>
+        <Typography variant="h4" gutterBottom>
+          E-ticaret Mağazası
+        </Typography>
+        <Filters />
+        <ProductList />
+      </Box>
+    </Container>
   );
-}
+};
 
 export default App;
